@@ -14,8 +14,9 @@ public class Main {
         // Exercise 5
 //        Program.noDupsNoArrayList();
         // Exercise 6
-//        int[] arr1 = {0,1,2,69,420};
-//        int[] arr2 = {50,60, 65};
+//        int[] arr2 = {0,1,2, 3, 3,69,420};
+//        int[] arr1 = {50,60, 65};
 //        Program.MergeSort6(arr1, arr2);
+
     }
 }
