@@ -86,5 +86,14 @@ public class Program {
         System.out.println(highest);
         System.out.println(Arrays.toString(l));
     }
+    public static int[] fourth(int num){
+        String s = String.valueOf(num);
+        int[] frequency = new int[10];
+        for (int c = 0; c < s.length(); c++) {
+            int j = Integer.parseInt(String.valueOf(s.charAt(c)));
+            frequency[j] ++;
+        }
+        return frequency;
+    }
 
 }
