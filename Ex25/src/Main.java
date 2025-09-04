@@ -9,6 +9,18 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Num: ");
         int j = scanner.nextInt();
-        System.out.println(Program.printArray(Program.fourth(j)));
+        while (j != -1){
+            int[] fourth = Program.fourth(j);
+            int m = 0;
+            for (int i = 0; i < fourth.length; i++) {
+                if (fourth[i] > fourth[m]){
+                    m = i;
+                }
+            }
+            System.out.println(m);
+            System.out.println("Num: ");
+            j = scanner.nextInt();
+        }
+
     }
 }
