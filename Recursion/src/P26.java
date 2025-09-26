@@ -1,6 +1,7 @@
 public class P26 {
 
     public static void main(String[] args){
+
         System.out.println(ex1(5));
         System.out.println(ex2(5));
         System.out.println(ex3(7));
@@ -8,7 +9,7 @@ public class P26 {
         System.out.println(ex5(5, 3));
         System.out.println(ex6(5, 6));
         System.out.println(ex7(15, 3));
-        System.out.println(ex8(12, 2));
+        System.out.println(ex8(5, 2));
         System.out.println(ex9(111, 2));
         System.out.println(ex10(3, 0));
         System.out.println(ex11(2, 0.0));
@@ -55,7 +56,9 @@ public class P26 {
     }
 
     public static boolean ex8(int n, int y){
-        if (Math.sqrt(n) == y) return true;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+        if (Math.sqrt(n) + 1 <= y) return true;
         if (n%y == 0) return false;
         return ex8(n, y+1);
     }
