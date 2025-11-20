@@ -3,13 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Cyber2025-2026.iml" filepath="$PROJECT_DIR$/.idea/Cyber2025-2026.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DSA/DSA.iml" filepath="$PROJECT_DIR$/DSA/DSA.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ex20/Ex20.iml" filepath="$PROJECT_DIR$/Ex20/Ex20.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ex22/Ex22.iml" filepath="$PROJECT_DIR$/Ex22/Ex22.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ex23/Ex23.iml" filepath="$PROJECT_DIR$/Ex23/Ex23.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ex24/Ex24.iml" filepath="$PROJECT_DIR$/Ex24/Ex24.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ex25/Ex25.iml" filepath="$PROJECT_DIR$/Ex25/Ex25.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ex26/Ex26.iml" filepath="$PROJECT_DIR$/Ex26/Ex26.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Queues/Queues.iml" filepath="$PROJECT_DIR$/Queues/Queues.iml" />
       <module fileurl="file://$PROJECT_DIR$/Recursion/Recursion.iml" filepath="$PROJECT_DIR$/Recursion/Recursion.iml" />
     </modules>
   </component>
