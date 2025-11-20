@@ -1,7 +1,7 @@
 public class P28 {
 
     public static void main(String[] args) {
-        ex24('b', 'o');
+        ex24('a', 'z');
     }
 
     public static void ex24(char beginChar, char endChar){

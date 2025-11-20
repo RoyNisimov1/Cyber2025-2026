@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int[] i = {1, 2, 4};
+        System.out.println(i.length);
         System.out.println(Program.B2C("abcdB"));
         System.out.println(Program.doesNotContainDigits("abcdB4"));
 

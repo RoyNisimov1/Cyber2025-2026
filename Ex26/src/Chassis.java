@@ -1,5 +1,7 @@
 public class Chassis {
+
     private String number;
+
     public Chassis(String number){
         this.number = number;
     }
