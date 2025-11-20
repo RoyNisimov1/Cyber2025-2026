@@ -9,7 +9,7 @@ public class P1 {
         System.out.println(ex6(5, 6));
         System.out.println(ex7(15, 3));
         System.out.println(ex8(12, 2));
-        System.out.println(ex9(111, 2));
+        System.out.println(ex9(1, 2));
     }
 
     public static int ex1(int num){
