@@ -1,7 +1,6 @@
-public class P26 {
+public class P1 {
 
     public static void main(String[] args){
-
         System.out.println(ex1(5));
         System.out.println(ex2(5));
         System.out.println(ex3(7));
@@ -9,12 +8,8 @@ public class P26 {
         System.out.println(ex5(5, 3));
         System.out.println(ex6(5, 6));
         System.out.println(ex7(15, 3));
-        System.out.println(ex8(5, 2));
+        System.out.println(ex8(12, 2));
         System.out.println(ex9(111, 2));
-        System.out.println(ex10(3, 0));
-        System.out.println(ex11(2, 0.0));
-        System.out.println(ex13(4));
-        System.out.println(ex13b(5, 0));
     }
 
     public static int ex1(int num){
@@ -56,9 +51,7 @@ public class P26 {
     }
 
     public static boolean ex8(int n, int y){
-        if (n == 2) return true;
-        if (n % 2 == 0) return false;
-        if (Math.sqrt(n) + 1 <= y) return true;
+        if (Math.sqrt(n) == y) return true;
         if (n%y == 0) return false;
         return ex8(n, y+1);
     }
@@ -76,35 +69,4 @@ public class P26 {
         return ex9(num / 10, (num % 10) % 2);
 
     }
-
-    public static int ex10(int i, int acc){
-        if (i == 0) {
-            return acc;
-        }
-        int a = ((i%2) == 0) ? i*i : 2*i;
-        return ex10(i-1, acc + a);
-    }
-    public static double ex11(double i, double acc){
-        if (i <= 0) {
-            return acc;
-        }
-        double a = i;
-        if ((i%2) == 0){
-            a = - Math.sqrt(i+1);
-        }
-        return ex11(i-1, acc + a);
-    }
-    public static int ex13(int n){
-        if (n == 0) return 0;
-        if (n == 1) return 1;
-        int last_one = ex13(n - 1);
-        int last_second = ex13(n - 2);
-        return last_one * last_one + last_second * last_second;
-    }
-    public static int ex13b(int n,int acc){
-        if (n <= 0) return acc;
-        int a = ex13(n);
-        return ex13b(n-1, acc + a);
-    }
 }
-
