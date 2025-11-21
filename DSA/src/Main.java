@@ -1,6 +1,45 @@
 import java.util.Scanner;
 
 public class Main {
+
+    public static void main(String[] args) {
+        Queue<Integer> q1 = buildInputSortedIntQueue2();
+        printQueue(q1);
+    }
+
+    // Q3
+    public static void printQueue(Queue<Integer> q){
+        String s = "h[";
+        Queue<Integer> t = new Queue<>();
+        while (!q.isEmpty()){
+            int cur = q.remove();
+            t.insert(cur);
+            s += cur + "";
+            if (!q.isEmpty()) s+=", ";
+        }
+        s+="]";
+        System.out.println(s);
+        while (!t.isEmpty()){
+            q.insert(t.remove());
+        }
+    }
+
+    // Q4
+    public static Queue<Integer> buildInputIntQueue()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter numbers:");
+        int num = scanner.nextInt();
+        Queue<Integer> integerQueue = new Queue<>();
+        while (num != -999)
+        {
+            integerQueue.insert(num);
+            num = scanner.nextInt();
+        }
+        return integerQueue;
+    }
+
+
     public static void buildQueues(Queue<Integer> qu1, Queue<Integer> qu2)
     {
         Scanner scanner = new Scanner(System.in);
@@ -15,19 +54,9 @@ public class Main {
             num = scanner.nextInt();
         }
     }
-    public static Queue<Integer> buildInputIntQueue()
-    {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter numbers:");
-        int num = scanner.nextInt();
-        Queue<Integer> integerQueue = new Queue<>();
-        while (num != -999)
-        {
-            integerQueue.insert(num);
-            num = scanner.nextInt();
-        }
-        return integerQueue;
-    }
+
+
+
     public static Node<Integer> findMin(Queue<Integer> q){
         Node<Integer> cur = q.getFirst();
         Node<Integer> min = cur;
@@ -71,7 +100,7 @@ public class Main {
         }
     }
 
-
+    // Q5
     public static Queue<Integer> buildInputSortedIntQueue()
     {
         Queue<Integer> integerQueue = buildInputIntQueue();
@@ -84,6 +113,36 @@ public class Main {
         return q;
     }
 
+    //Q5 different sol
+    public static Queue<Integer> buildInputSortedIntQueue2()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter numbers:");
+        int num = scanner.nextInt();
+        Queue<Integer> integerQueue = new Queue<>();
+        Queue<Integer> sortedIntegerQueue = new Queue<>();
+        while (num != -999)
+        {
+            if (sortedIntegerQueue.isEmpty()) sortedIntegerQueue.insert(num);
+            else {
+                while (!sortedIntegerQueue.isEmpty() && num > sortedIntegerQueue.head()){
+                    integerQueue.insert(sortedIntegerQueue.remove());
+                }
+                integerQueue.insert(num);
+                while (!sortedIntegerQueue.isEmpty()){
+                    integerQueue.insert(sortedIntegerQueue.remove());
+                }
+                while (!integerQueue.isEmpty()){
+                    sortedIntegerQueue.insert(integerQueue.remove());
+                }
+            }
+            num = scanner.nextInt();
+        }
+        return sortedIntegerQueue;
+    }
+
+
+    //Q6
     public static boolean isExist(Queue<Integer> q, int num){
         Node<Integer> cur = q.getFirst();
         while (cur != null){
@@ -111,17 +170,7 @@ public class Main {
         return false;
     }
 
-    public static void printQueue(Queue<Integer> q){
-        String s = "h[";
-        Node<Integer> cur = q.getFirst();
-        while (cur != null){
-            s += cur.getValue();
-            if (cur.getNext() != null) s+=", ";
-            cur = cur.getNext();
-        }
-        s+="]";
-        System.out.println(s);
-    }
+
 
 
 
@@ -150,8 +199,5 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
-        Queue<Integer> q1 = buildInputSortedIntQueue();
-        printQueue(q1);
-    }
+
 }
