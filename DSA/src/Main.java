@@ -4,7 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
         Queue<Integer> q1 = buildInputSortedIntQueue2();
+        Queue<Integer> q2 = buildInputSortedIntQueue2();
         printQueue(q1);
+        printQueue(q2);
+        System.out.println(merge(q1, q2));
     }
 
     // Q3
@@ -144,36 +147,30 @@ public class Main {
 
     //Q6
     public static boolean isExist(Queue<Integer> q, int num){
-        Node<Integer> cur = q.getFirst();
-        while (cur != null){
-            if (cur.getValue() == num){
-                return true;
-            }
-            cur = cur.getNext();
+        Queue<Integer> t = new Queue<>();
+        boolean ret = false;
+        while (!q.isEmpty()){
+            int cur = q.remove();
+            t.insert(cur);
+            if (cur == num) ret = true;
         }
-        return false;
+        while (!t.isEmpty()) q.insert(t.remove());
+        return ret;
     }
-
+    //Q7
     public static boolean isNumInSeq(Queue<Integer> q, int num){
-        Node<Integer> cur = q.getFirst();
-        int current_seq_length = 0;
-        while (cur != null){
-            if (cur.getValue() == num){
-                current_seq_length++;
-                if (current_seq_length>=2) return true;
-            } else {
-                current_seq_length = 0;
-            }
-
-            cur = cur.getNext();
+        int count = 0;
+        Queue<Integer> t = new Queue<>();
+        while (!q.isEmpty()){
+            int cur = q.remove();
+            if (cur == num){
+                count++;
+            }else if (count < 2) count = 0;
+            t.insert(cur);
         }
-        return false;
+        return count >= 2;
     }
-
-
-
-
-
+    //Q8
     public static boolean haveSameElements(Queue<Integer> q1, Queue<Integer> q2){
         while (!q1.isEmpty()){
             int minQ1 = findMin(q1).getValue();
@@ -184,18 +181,26 @@ public class Main {
                 q1.remove(minQ1);
                 q2.remove(minQ2);
             }else return false;
-
         }
-        if (!q2.isEmpty()) return false;
-        return true;
+        return q2.isEmpty();
     }
 
-
+    //Q9
     public static Queue<Integer> merge(Queue<Integer> q1, Queue<Integer> q2){
-        while (!q2.isEmpty()){
-            q1.insert(q2.remove());
+        Queue<Integer> q = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()){
+            if (q1.isEmpty()) q.insert(q2.remove());
+            else if (q2.isEmpty()) q.insert(q1.remove());
+            else {
+                if (q1.head() <= q2.head()) {
+                    q.insert(q1.remove());
+                }
+                else {
+                    q.insert(q2.remove());
+                }
+            }
         }
-        return q1;
+        return q;
     }
 
 
