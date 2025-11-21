@@ -63,8 +63,65 @@ public class Main {
         return q;
     }
 
+    public static boolean isExist(Queue<Integer> q, int num){
+        Node<Integer> cur = q.getFirst();
+        while (cur != null){
+            if (cur.getValue() == num){
+                return true;
+            }
+            cur = cur.getNext();
+        }
+        return false;
+    }
+
+    public static boolean isNumInSeq(Queue<Integer> q, int num){
+        Node<Integer> cur = q.getFirst();
+        int current_seq_length = 0;
+        while (cur != null){
+            if (cur.getValue() == num){
+                current_seq_length++;
+                if (current_seq_length>=2) return true;
+            } else {
+                current_seq_length = 0;
+            }
+
+            cur = cur.getNext();
+        }
+        return false;
+    }
+
+
+    public static boolean haveSameElements(Queue<Integer> q1, Queue<Integer> q2){
+        while (!q1.isEmpty()){
+            int minQ1 = findMin(q1).getValue();
+            Node<Integer> minQ2N = findMin(q2);
+            if (minQ2N != null){
+                int minQ2 = minQ2N.getValue();
+                if (minQ1 != minQ2) return false;
+                q1.remove(minQ1);
+                q2.remove(minQ2);
+            }else return false;
+
+        }
+        if (!q2.isEmpty()) return false;
+        return true;
+    }
+
+
+    public static Queue<Integer> merge(Queue<Integer> q1, Queue<Integer> q2){
+        while (!q2.isEmpty()){
+            q1.Insert(q2.remove());
+        }
+        return q1;
+    }
+
+
     public static void main(String[] args) {
-        Queue<Integer> q1 = buildInputSortedIntQueue();
+        Queue<Integer> q1 = buildInputIntQueue();
+        Queue<Integer> q2 = buildInputIntQueue();
         System.out.println(q1.toString());
+        System.out.println(q2.toString());
+        System.out.println(merge(q1, q2));
+
     }
 }
