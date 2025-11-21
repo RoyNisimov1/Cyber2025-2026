@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Queue<Integer> q1 = buildInputSortedIntQueue2();
-        Queue<Integer> q2 = buildInputSortedIntQueue2();
+        Queue<Integer> q1 = buildInputSortedIntQueue();
+        Queue<Integer> q2 = buildInputSortedIntQueue();
         printQueue(q1);
         printQueue(q2);
-        System.out.println(merge(q1, q2));
+        System.out.println(haveSameElements(q1, q2));
     }
 
     // Q3
@@ -60,28 +60,19 @@ public class Main {
 
 
 
-    public static Node<Integer> findMin(Queue<Integer> q){
-        Node<Integer> cur = q.getFirst();
-        Node<Integer> min = cur;
-        while (cur != null){
-            if (cur.getValue() <= min.getValue()){
-                min = cur;
+    public static int findMin(Queue<Integer> q){
+        Queue<Integer> t = new Queue<>();
+        int min = q.head();
+        while (!q.isEmpty()){
+            if (q.head() <= min){
+                min = q.head();
             }
-            cur = cur.getNext();
+            t.insert(q.remove());
         }
+        while (!t.isEmpty()) q.insert(t.remove());
         return min;
     }
-    public static Node<Integer> findMax(Queue<Integer> q){
-        Node<Integer> cur = q.getFirst();
-        Node<Integer> max = cur;
-        while (cur != null){
-            if (cur.getValue() >= max.getValue()){
-                max = cur;
-            }
-            cur = cur.getNext();
-        }
-        return max;
-    }
+
 
     public static void removeFromQueue(Queue<Integer> q, int value){
         Queue<Integer> t = new Queue<>();
@@ -109,9 +100,9 @@ public class Main {
         Queue<Integer> integerQueue = buildInputIntQueue();
         Queue<Integer> q = new Queue<>();
         while (!integerQueue.isEmpty()){
-            Node<Integer> min = findMin(integerQueue);
-            q.insert(min.getValue());
-            removeFromQueue(integerQueue,min.getValue());
+            int min = findMin(integerQueue);
+            q.insert(min);
+            removeFromQueue(integerQueue,min);
         }
         return q;
     }
@@ -172,18 +163,41 @@ public class Main {
     }
     //Q8
     public static boolean haveSameElements(Queue<Integer> q1, Queue<Integer> q2){
+        Queue<Integer> t1 = new Queue<>();
+        boolean ret = true;
+        if (size(q1) != size(q2)) return false;
         while (!q1.isEmpty()){
-            int minQ1 = findMin(q1).getValue();
-            Node<Integer> minQ2N = findMin(q2);
-            if (minQ2N != null){
-                int minQ2 = minQ2N.getValue();
-                if (minQ1 != minQ2) return false;
-                q1.remove(minQ1);
-                q2.remove(minQ2);
-            }else return false;
+            if (!isInQueue(q2, q1.head())) ret = false;
+            t1.insert(q1.remove());
         }
-        return q2.isEmpty();
+        while (!t1.isEmpty()){
+            q1.insert(t1.remove());
+        }
+        return ret;
     }
+    public static int size(Queue<Integer> q){
+        Queue<Integer> t = new Queue<>();
+        int ret = 0;
+        while (!q.isEmpty()){
+            ret++;
+            t.insert(q.remove());
+        }
+        while (!t.isEmpty()) q.insert(t.remove());
+        return ret;
+    }
+
+    public static boolean isInQueue(Queue<Integer> q, int target){
+        Queue<Integer> t = new Queue<>();
+        boolean ret = false;
+        while (!q.isEmpty()){
+            if (q.head() == target) ret = true;
+            t.insert(q.remove());
+        }
+        while (!t.isEmpty()) q.insert(t.remove());
+        return ret;
+
+    }
+
 
     //Q9
     public static Queue<Integer> merge(Queue<Integer> q1, Queue<Integer> q2){
