@@ -28,28 +28,21 @@ public class Main {
         }
         return integerQueue;
     }
-    public static Node<Integer> findMin(Queue<Integer> q){
-        Node<Integer> cur = q.getFirst();
-        Node<Integer> min = cur;
-        while (cur != null){
-            if (cur.getValue() <= min.getValue()){
-                min = cur;
-            }
-            cur = cur.getNext();
+    public static int findMin(Queue<Integer> q){
+        Queue<Integer> temp = new Queue<>();
+        int min = q.head();
+        while (!q.isEmpty()){
+            int o = q.remove();
+            temp.insert(o);
+            if (o <= min) min = o;
+
+        }
+        while (!temp.isEmpty()){
+            q.insert(temp.remove());
         }
         return min;
     }
-    public static Node<Integer> findMax(Queue<Integer> q){
-        Node<Integer> cur = q.getFirst();
-        Node<Integer> max = cur;
-        while (cur != null){
-            if (cur.getValue() >= max.getValue()){
-                max = cur;
-            }
-            cur = cur.getNext();
-        }
-        return max;
-    }
+
 
     public static void removeFromQueue(Queue<Integer> q, int value){
         Queue<Integer> t = new Queue<>();
@@ -77,9 +70,9 @@ public class Main {
         Queue<Integer> integerQueue = buildInputIntQueue();
         Queue<Integer> q = new Queue<>();
         while (!integerQueue.isEmpty()){
-            Node<Integer> min = findMin(integerQueue);
-            q.insert(min.getValue());
-            removeFromQueue(integerQueue,min.getValue());
+            int min = findMin(integerQueue);
+            q.insert(min);
+            removeFromQueue(integerQueue,min);
         }
         return q;
     }
@@ -127,15 +120,12 @@ public class Main {
 
     public static boolean haveSameElements(Queue<Integer> q1, Queue<Integer> q2){
         while (!q1.isEmpty()){
-            int minQ1 = findMin(q1).getValue();
-            Node<Integer> minQ2N = findMin(q2);
-            if (minQ2N != null){
-                int minQ2 = minQ2N.getValue();
-                if (minQ1 != minQ2) return false;
-                q1.remove(minQ1);
-                q2.remove(minQ2);
-            }else return false;
-
+            if (q2.isEmpty()) return false;
+            int minQ1 = findMin(q1);
+            int minQ2 = findMin(q2);
+            if (minQ1 != minQ2) return false;
+            q1.remove(minQ1);
+            q2.remove(minQ2);
         }
         if (!q2.isEmpty()) return false;
         return true;
