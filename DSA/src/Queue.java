@@ -6,7 +6,7 @@ public class Queue<T>
         this.first = null;
         this.last = null;
     }
-    public void Insert(T x){
+    public void insert(T x){
         Node<T> temp = new Node<T>(x);
         if (first == null)
             first = temp;
@@ -62,12 +62,12 @@ public class Queue<T>
 
     public void prepend(T obj){
         Queue<T> q = new Queue<>();
-        q.Insert(obj);
+        q.insert(obj);
         while (!this.isEmpty()){
-            q.Insert(this.remove());
+            q.insert(this.remove());
         }
         while (!q.isEmpty()){
-            this.Insert(q.remove());
+            this.insert(q.remove());
         }
     }
 

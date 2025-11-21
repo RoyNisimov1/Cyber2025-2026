@@ -9,9 +9,9 @@ public class Main {
         while (num != -999)
         {
             if (num % 2 == 0)
-                qu1.Insert(num);
+                qu1.insert(num);
             else
-                qu2.Insert(num);
+                qu2.insert(num);
             num = scanner.nextInt();
         }
     }
@@ -23,7 +23,7 @@ public class Main {
         Queue<Integer> integerQueue = new Queue<>();
         while (num != -999)
         {
-            integerQueue.Insert(num);
+            integerQueue.insert(num);
             num = scanner.nextInt();
         }
         return integerQueue;
@@ -51,14 +51,35 @@ public class Main {
         return max;
     }
 
+    public static void removeFromQueue(Queue<Integer> q, int value){
+        Queue<Integer> t = new Queue<>();
+        boolean found = false;
+        while (!q.isEmpty()){
+            int cur = q.remove();
+            if (!found){
+                if (cur == value) {
+                    found = true;
+                }
+                else t.insert(cur);
+            } else {
+                t.insert(cur);
+            }
+        }
+
+        while (!t.isEmpty()){
+            q.insert(t.remove());
+        }
+    }
+
+
     public static Queue<Integer> buildInputSortedIntQueue()
     {
         Queue<Integer> integerQueue = buildInputIntQueue();
         Queue<Integer> q = new Queue<>();
         while (!integerQueue.isEmpty()){
             Node<Integer> min = findMin(integerQueue);
-            q.Insert(min.getValue());
-            integerQueue.remove(min.getValue());
+            q.insert(min.getValue());
+            removeFromQueue(integerQueue,min.getValue());
         }
         return q;
     }
@@ -90,6 +111,19 @@ public class Main {
         return false;
     }
 
+    public static void printQueue(Queue<Integer> q){
+        String s = "h[";
+        Node<Integer> cur = q.getFirst();
+        while (cur != null){
+            s += cur.getValue();
+            if (cur.getNext() != null) s+=", ";
+            cur = cur.getNext();
+        }
+        s+="]";
+        System.out.println(s);
+    }
+
+
 
     public static boolean haveSameElements(Queue<Integer> q1, Queue<Integer> q2){
         while (!q1.isEmpty()){
@@ -110,18 +144,14 @@ public class Main {
 
     public static Queue<Integer> merge(Queue<Integer> q1, Queue<Integer> q2){
         while (!q2.isEmpty()){
-            q1.Insert(q2.remove());
+            q1.insert(q2.remove());
         }
         return q1;
     }
 
 
     public static void main(String[] args) {
-        Queue<Integer> q1 = buildInputIntQueue();
-        Queue<Integer> q2 = buildInputIntQueue();
-        System.out.println(q1.toString());
-        System.out.println(q2.toString());
-        System.out.println(merge(q1, q2));
-
+        Queue<Integer> q1 = buildInputSortedIntQueue();
+        printQueue(q1);
     }
 }
