@@ -21,9 +21,28 @@ public class Queue<T>
             last = null;
         return x;
     }
+    public void remove(T value){
+        Node<T> cur = this.getFirst();
+        if (cur.getValue() == value){
+            this.remove();
+            return;
+        }
+        while (cur.getNext() != null){
+            if (cur.getNext().getValue() == value){
+                cur.setNext(cur.getNext().getNext());
+                return;
+            }
+            cur = cur.getNext();
+        }
+
+    }
     public T head(){
         return first.getValue();
     }
+    public Node<T> getFirst(){
+        return this.first;
+    }
+
     public boolean isEmpty(){
         return first == null;
     }
@@ -51,4 +70,6 @@ public class Queue<T>
             this.Insert(q.remove());
         }
     }
+
+
 }
