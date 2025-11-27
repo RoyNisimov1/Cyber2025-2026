@@ -3,11 +3,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Queue<Integer> q1 = buildInputSortedIntQueue();
-        Queue<Integer> q2 = buildInputSortedIntQueue();
+        Queue<Integer> q1 = buildInputIntQueue();
+        Queue<Integer> q2 = buildInputIntQueue();
         printQueue(q1);
         printQueue(q2);
         System.out.println(haveSameElements(q1, q2));
+        printQueue(q1);
+        printQueue(q2);
     }
 
     // Q3
@@ -159,15 +161,28 @@ public class Main {
             }else if (count < 2) count = 0;
             t.insert(cur);
         }
+        while (!t.isEmpty()) q.insert(t.remove());
+
         return count >= 2;
     }
     //Q8
     public static boolean haveSameElements(Queue<Integer> q1, Queue<Integer> q2){
-        Queue<Integer> t1 = new Queue<>();
-        boolean ret = true;
         if (size(q1) != size(q2)) return false;
+
+        Queue<Integer> q2Copy = new Queue<>();
+        Queue<Integer> t1 = new Queue<>();
+
+        while (!q2.isEmpty()){
+            q2Copy.insert(q2.head());
+            t1.insert(q2.remove());
+        }
+        while (!t1.isEmpty()){
+            q2.insert(t1.remove());
+        }
+        boolean ret = true;
         while (!q1.isEmpty()){
-            if (!isInQueue(q2, q1.head())) ret = false;
+            if (!isInQueue(q2Copy, q1.head())) ret = false;
+            removeFromQueue(q2Copy, q1.head());
             t1.insert(q1.remove());
         }
         while (!t1.isEmpty()){
