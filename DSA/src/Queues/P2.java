@@ -1,4 +1,6 @@
-public class P3 {
+package Queues;
+
+public class P2 {
 
     public static void main(String[] args) {
         // Q1
@@ -49,42 +51,12 @@ public class P3 {
         else System.out.println("small");
         System.out.println(removeMin(q1));
         System.out.println(q1);
-
-        //5
-        Queue<Character> q4 = new Queue<>();
-        q4.insert('a');
-        q4.insert('e');
-        q4.insert('d');
-        q4.insert('a');
-        q4.insert('c');
-        System.out.println(q4);
-        System.out.println(removeMin2(q4));
-        System.out.println(q4);
-
-
-        //6
-        Queue<Integer> q5 = new Queue<>();
-        q5.insert(9);
-        q5.insert(2);
-        q5.insert(1);
-        q5.insert(5);
-        q5.insert(3);
-        System.out.println(q5);
-        System.out.println(getVal(q5, 1));
-        System.out.println(getVal(q5, 6));
-
-
-        //7
-        System.out.println(q4);
-        sort(q4);
-        System.out.println(q4);
-
     }
 
     //Q2
-    public static <T> int count(Queue<T> q, T X){
+    public static int count(Queue<Integer> q, int X){
         int count = 0;
-        Queue<T> t = new Queue<>();
+        Queue<Integer> t = new Queue<>();
         while (!q.isEmpty()){
             if (q.head() == X) count++;
             t.insert(q.remove());
@@ -147,56 +119,4 @@ public class P3 {
     }
 
 
-    //Q5
-    public static char removeMin2(Queue<Character> q){
-        char cur = q.head();
-        Queue<Character> t = new Queue<>();
-        while (!q.isEmpty()){
-            if(q.head() < cur) cur = q.head();
-            t.insert(q.remove());
-        }
-        boolean removed = false;
-        while (!t.isEmpty()) {
-            if (removed) q.insert(t.remove());
-            else {
-                if(t.head() == cur){
-                    removed = true;
-                    t.remove();
-                }
-                else q.insert(t.remove());
-            }
-        }
-
-        return cur;
-    }
-
-
-    //Q6
-    public static <T> T getVal(Queue<T> q, int index){
-        int i = 1;
-        Queue<T> t = new Queue<>();
-        T selection = null;
-        while (!q.isEmpty()){
-            if (i == index){
-                selection = q.head();
-            }
-            i++;
-            t.insert(q.remove());
-        }
-        while (!t.isEmpty()){
-
-            q.insert(t.remove());
-        }
-        return selection;
-
-    }
-
-    //Q7
-    public static void sort(Queue<Character> q){
-        Queue<Character> sortedQ = new Queue<>();
-        while (!q.isEmpty()){
-            sortedQ.insert(removeMin2(q));
-        }
-        while (!sortedQ.isEmpty()) q.insert(sortedQ.remove());
-    }
 }

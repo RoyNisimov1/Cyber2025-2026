@@ -1,3 +1,5 @@
+import Queues.Node;
+
 public class LinkedList<T> {
 
     private Node<T> head;
