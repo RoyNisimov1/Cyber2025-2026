@@ -61,7 +61,16 @@ public class Queue<T>
         s = s + "]";
         return s;
     }
-
+    public Queue<T> clone(){
+        Queue<T> t = new Queue<>();
+        Queue<T> c = new Queue<>();
+        while (!this.isEmpty()){
+            c.insert(this.head());
+            t.insert(this.remove());
+        }
+        while (!t.isEmpty()) this.insert(t.remove());
+        return c;
+    }
     public void prepend(T obj){
         Queue<T> q = new Queue<>();
         q.insert(obj);
