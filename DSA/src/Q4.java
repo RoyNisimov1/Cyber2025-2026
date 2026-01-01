@@ -5,26 +5,79 @@ import java.util.Scanner;
 public class Q4 {
 
     public static void main(String[] args) {
-        Node<Integer> r = new Node<>(1);
-        r.setNext(new Node<>(2));
+        Node<Integer> r = new Node<>(7);
+        r.setNext(new Node<>(5));
         Node<Integer> c = r.getNext();
+        c.setNext(new Node<>(6));
+        c = c.getNext();
+        c.setNext(new Node<>(6));
+        c = c.getNext();
         c.setNext(new Node<>(3));
         c = c.getNext();
-        c.setNext(new Node<>(4));
+        c.setNext(new Node<>(7));
         c = c.getNext();
-        c.setNext(new Node<>(5));
+        c.setNext(new Node<>(7));
         c = c.getNext();
-        c.setNext(new Node<>(4));
-        c = c.getNext();
-        c.setNext(new Node<>(5));
-        c = c.getNext();
-        c.setNext(new Node<>(4));
+        c.setNext(new Node<>(7));
         c = c.getNext();
         c.setNext(new Node<>(5));
 
         printList(r);
-        r = exc14(r, 3);
+        System.out.println(exc2(r,7));
         printList(r);
+        exc3(r, 2, 5);
+        System.out.println(exc4(r));
+        r = exc5(r, 7);
+        printList(r);
+
+        r = new Node<>(7);
+        r.setNext(new Node<>(5));
+        c = r.getNext();
+        c.setNext(new Node<>(6));
+        c = c.getNext();
+        c.setNext(new Node<>(6));
+        c = c.getNext();
+        c.setNext(new Node<>(3));
+        c = c.getNext();
+        c.setNext(new Node<>(7));
+        c = c.getNext();
+        c.setNext(new Node<>(7));
+        c = c.getNext();
+        c.setNext(new Node<>(7));
+        c = c.getNext();
+        c.setNext(new Node<>(5));
+
+        printList(r);
+        r = exc6(r);
+        printList(r);
+
+        printList(exc7());
+
+        r = new Node<>(1);
+        r.setNext(new Node<>(3));
+        c = r.getNext();
+        c.setNext(new Node<>(2));
+
+
+        printList(r);
+
+        System.out.println(exc8(r));
+
+        exc9(r);
+
+        Node<Integer> h = exc10(2, 5);
+        printList(h);
+
+        h = exc11();
+        printList(h);
+
+        System.out.println(exc12(h));
+
+        h=exc13(h);
+        printList(h);
+
+        h = exc14(h, 2);
+        printList(h);
 
     }
     public static <T> void printList(Node<T> list){
@@ -58,7 +111,7 @@ public class Q4 {
     public static void exc3(Node<Integer> list, int l, int r){
         int i = 0;
         while (list != null){
-            if(i<= r && i>= l) System.out.println(list.getValue());
+            if(i< r && i> l) System.out.println(list.getValue());
             i++;
             list = list.getNext();
         }
@@ -116,11 +169,13 @@ public class Q4 {
     }
 
     public static Node<Integer> exc7(){
-        Random random = new Random();
-        Node<Integer> dummy = new Node<>(random.nextInt());
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(90) + 10;
+        Node<Integer> dummy = new Node<>(randomNumber);
         Node<Integer> root = dummy;
         for (int i = 0; i < 49; i++) {
-            root.setNext(new Node<>(random.nextInt()));
+            randomNumber = rand.nextInt(90) + 10;
+            root.setNext(new Node<>(randomNumber));
             root = root.getNext();
         }
         return exc6(dummy);
@@ -137,7 +192,7 @@ public class Q4 {
     public static void exc9(Node<Integer> list){
 
         while (list.getNext()!= null){
-            if(list.getNext().getValue() > list.getValue()) System.out.println(list.getValue());;
+            if(list.getNext().getValue() < list.getValue()) System.out.println(list.getValue());;
             list = list.getNext();
         }
 
@@ -147,7 +202,7 @@ public class Q4 {
         Node<Integer> root = dummy;
         num = num - beginner;
         beginner++;
-        int i = 0;
+        int i = 1;
         while (i <= num){
             dummy.setNext(new Node<>(beginner));
             beginner++;
