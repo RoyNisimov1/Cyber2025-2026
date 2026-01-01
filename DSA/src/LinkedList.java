@@ -97,6 +97,15 @@ public class LinkedList<T> {
     public void setTail(Node<T> tail) {
         this.tail = tail;
     }
+    public Node<T> getHead(){
+        return this.head;
+    }
+    public void setHead(Node<T> newHead){
+        newHead.setNext(this.head.getNext());
+        this.head.setNext(null);
+        this.head = newHead;
+    }
+
 
     public int getSize() {
         return size;
