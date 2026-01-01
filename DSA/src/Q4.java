@@ -5,44 +5,26 @@ import java.util.Scanner;
 public class Q4 {
 
     public static void main(String[] args) {
-        Node<Integer> r = new Node<>(3);
-        r.setNext(new Node<>(5));
+        Node<Integer> r = new Node<>(1);
+        r.setNext(new Node<>(2));
         Node<Integer> c = r.getNext();
+        c.setNext(new Node<>(3));
+        c = c.getNext();
+        c.setNext(new Node<>(4));
+        c = c.getNext();
         c.setNext(new Node<>(5));
         c = c.getNext();
-        c.setNext(new Node<>(7));
+        c.setNext(new Node<>(4));
         c = c.getNext();
-        c.setNext(new Node<>(7));
+        c.setNext(new Node<>(5));
         c = c.getNext();
-        c.setNext(new Node<>(7));
+        c.setNext(new Node<>(4));
         c = c.getNext();
-        c.setNext(new Node<>(3));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(3));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        c = c.getNext();
-        c.setNext(new Node<>(7));
-        System.out.println(exc2(r, 7));
-        ex3(r, 0, 4);
-        printList(r);
+        c.setNext(new Node<>(5));
 
-        exc5(r, 7);
         printList(r);
-        Node<Integer> l = exc6(r);
-
+        r = exc14(r, 3);
+        printList(r);
 
     }
     public static <T> void printList(Node<T> list){
@@ -73,7 +55,7 @@ public class Q4 {
         return seqs;
     }
 
-    public static void ex3(Node<Integer> list, int l, int r){
+    public static void exc3(Node<Integer> list, int l, int r){
         int i = 0;
         while (list != null){
             if(i<= r && i>= l) System.out.println(list.getValue());
@@ -218,15 +200,99 @@ public class Q4 {
         return i;
     }
 
-    public static Node<Integer> exc13(Node<Integer> root){
-        int sizeOfList = size(root);
+    public static Node<Integer> exc13(Node<Integer> list){
+        int sizeOfList = size(list);
+        if (sizeOfList==2){
+            if(list.getValue()>list.getNext().getValue()){
+                return list.getNext();
+            }
+            else {
+                list.setNext(null);
+                return list;
+            }
+        }
+        Node<Integer> head = list;
         if(sizeOfList%2==0){
             int i = 0;
-            //
+            int halfOfList = sizeOfList / 2 - 1;
+
+            while(list.getNext()!=null){
+                if(i == halfOfList - 1){
+                    if(list.getNext().getValue() > list.getNext().getNext().getValue()){
+                        list.setNext(list.getNext().getNext());
+                    }else {
+                        list.getNext().setNext(list.getNext().getNext().getNext());
+                    }
+                }
+                i++;
+                list = list.getNext();
+            }
+        }
+        else {
+            head = head.getNext();
+            int i = 0;
+            while (list!=null && list.getNext()!=null){
+                if(i == sizeOfList-2){
+                    list.setNext(list.getNext().getNext());
+                }
+                i++;
+                list = list.getNext();
+            }
+        }
+        return head;
+    }
+
+    public static Node<Integer> insertSortedBigToSmall(Node<Integer> list, int num){
+        Node<Integer> head = list;
+        if(num>=list.getValue()){
+            return new Node<>(num, head);
+        }
+        while (list!=null && list.getNext()!=null){
+            if(num>=list.getNext().getValue()){
+                list.setNext(new Node<>(num, list.getNext()));
+                return head;
+            }
+            list = list.getNext();
+        }
+        list.setNext(new Node<>(num));
+        return head;
+    }
+
+    public static <T> void keepNFirstNums(Node<T> list, int num){
+        int i = 0;
+        while (list!=null){
+            if(i==num){
+                list.setNext(null);
+                return;
+            }
+            i++;
+            list=list.getNext();
         }
     }
 
-
+    public static Node<Integer> exc14(Node<Integer> list, int n){
+        n=n-1;
+        Node<Integer> sortedMaxes = new Node<>(list.getValue());
+        Node<Integer> head = list;
+        list=list.getNext();
+        while (list!=null){
+            sortedMaxes = insertSortedBigToSmall(sortedMaxes, list.getValue());
+            list=list.getNext();
+        }
+        list = head;
+        keepNFirstNums(sortedMaxes, n);
+        while (isInList(sortedMaxes, list.getValue())){
+            list = list.getNext();
+        }
+        head = list;
+        while (list!=null&&list.getNext()!=null){
+            while (list.getNext()!=null&&isInList(sortedMaxes, list.getNext().getValue())){
+                list.setNext(list.getNext().getNext());
+            }
+            list=list.getNext();
+        }
+        return head;
+    }
 
 
 }
