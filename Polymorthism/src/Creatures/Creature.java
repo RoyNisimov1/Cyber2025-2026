@@ -13,4 +13,9 @@ public class Creature {
         return creature.isBoy != this.isBoy;
     }
 
+    @Override
+    public String toString(){
+        return "name=" + this.name + " isBoy=" + isBoy;
+    }
+
 }

@@ -18,8 +18,13 @@ public class Wizard extends Creature {
     }
 
     public void setPower(int power) {
-        if (power<1) power = 1;
-        if (power>10) power = 10;
+//        if (power<1) power = 1;
+//        if (power>10) power = 10;
         this.power = power;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + " power=" + this.power;
     }
 }

@@ -14,4 +14,8 @@ public class WizardProgrammer extends Wizard{
     public void setCodesInJava(boolean codesInJava) {
         this.codesInJava = codesInJava;
     }
+    @Override
+    public String toString(){
+        return super.toString() + " codesInJava=" + this.codesInJava;
+    }
 }
