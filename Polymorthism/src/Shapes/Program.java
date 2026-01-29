@@ -14,7 +14,7 @@ public class Program {
         drawing.addShape(new Triangle(3, 4));
         System.out.println(drawing);
         System.out.println("Total area:" + drawing.totalArea());
-        System.out.println("Amount of circles:" + drawing.numberOfCircles());
+        System.out.println("Amount of circles:" + numberOfCircles(drawing));
 
         System.out.println(numOfShapeWithMaxArea(drawing));
         // index 6
@@ -24,20 +24,35 @@ public class Program {
         //2 circles
         //2 triangle
 
+        int r = 0;
+        int s = 0;
+        for (Shape shape: drawing.getShapes()) {
+            if(shape instanceof Rectangle && !(shape instanceof Square)) r++;
+            if(shape instanceof Square) s++;
+        }
+        System.out.println(r);
+        System.out.println(s);
     }
 
     public static int numOfShapeWithMaxArea(Drawing d){
         Shape[] s = d.getShapes();
-        int currentMaxInt = 0;
+        int currentMaxIndex = 0;
         double currentMaxArea = s[0].area();
         for (int i = 0; i < s.length; i++) {
             if(s[i] != null){
                 if(currentMaxArea < s[i].area()){
                     currentMaxArea = s[i].area();
-                    currentMaxInt = i;
+                    currentMaxIndex = i;
                 }
             }
         }
-        return currentMaxInt;
+        return currentMaxIndex;
+    }
+    public static int numberOfCircles(Drawing d){
+        int c = 0;
+        for(Shape shape: d.getShapes()){
+            if(shape instanceof Circle) c++;
+        }
+        return c;
     }
 }

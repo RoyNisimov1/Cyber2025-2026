@@ -42,14 +42,16 @@ public class Program {
         AirCraft[] usafAC = USAF.getAirCraft();
         AirCraft[] iafAC = IAF.getAirCraft();
         for (AirCraft ac: usafAC) {
+            if (ac == null) continue;
             if(ac instanceof FighterJet) numOfFJ++;
-            if(ac instanceof Helicopter) numOfH++;
+            if(ac.getClass() == Helicopter.class) numOfH++;
             if(ac instanceof HelicopterGunship) numOfHG++;
             if(ac instanceof Uav) numOfUAV++;
         }
         for (AirCraft ac: iafAC) {
+            if (ac == null) continue;
             if(ac instanceof FighterJet) numOfFJ++;
-            if(ac instanceof Helicopter) numOfH++;
+            if(ac.getClass() == Helicopter.class) numOfH++;
             if(ac instanceof HelicopterGunship) numOfHG++;
             if(ac instanceof Uav) numOfUAV++;
 

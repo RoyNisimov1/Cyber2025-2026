@@ -31,7 +31,7 @@ public class Drawing {
     }
 
     public double totalArea(){
-        double s = 0;
+        double s = 0.0;
         for(Shape shape: shapes){
             if (shape!=null)
                 s+=shape.area();
@@ -39,13 +39,7 @@ public class Drawing {
         return s;
     }
 
-    public int numberOfCircles(){
-        int c = 0;
-        for(Shape shape: shapes){
-            if(shape instanceof Circle) c++;
-        }
-        return c;
-    }
+
 
 
 }
