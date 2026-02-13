@@ -24,6 +24,15 @@ public class Main {
         System.out.println(ex12(root, 3));
         System.out.println(ex13(root));
 
+        BinNode<Integer> root2 = new BinNode<>(5);
+        root2.setLeft(new BinNode<>(4));
+        root2.getLeft().setLeft(new BinNode<>(2));
+        root2.setRight(new BinNode<>(3));
+        root2.getRight().setLeft(new BinNode<>(4));
+        root2.getRight().setRight(new BinNode<>(4));
+
+        System.out.println(equal(root, root2));
+
     }
 
 
@@ -158,4 +167,11 @@ public class Main {
         return false;
     }
 
+
+    public static <T> boolean equal(BinNode<T> root1, BinNode<T> root2){
+        if(root1 == null && root2 == null) return true;
+        if((root1 == null && root2 != null) || (root1 != null && root2 == null)) return false;
+        if(root1.getValue() != root2.getValue()) return false;
+        return equal(root1.getLeft(), root2.getLeft()) && equal(root1.getRight(), root2.getRight());
+    }
 }
