@@ -76,6 +76,19 @@ public class Main {
         Queue<BinNode<Integer>> q = new Queue<>();
         q.insert(root);
         ex29(q);
+        System.out.println("-------------------------------");
+        System.out.println(ex30(root));
+        System.out.println("-------------------------------");
+        System.out.println(root);
+        System.out.println(ex31(root, 2));
+        System.out.println("-------------------------------");
+        root = new BinNode<>(5);
+        root.setLeft(new BinNode<>(4));
+        root.getLeft().setLeft(new BinNode<>(2));
+        root.setRight(new BinNode<>(9));
+        root.getRight().setLeft(new BinNode<>(4));
+        root.getRight().setRight(new BinNode<>(10));
+        System.out.println(ex32(root, 4));
     }
 
 
@@ -336,5 +349,25 @@ public class Main {
         if(r.hasLeft() && r.getLeft().getValue() >= r.getValue()) return false;
         if(r.hasRight() && r.getRight().getValue() >= r.getValue()) return false;
         return ex30(r.getLeft()) && ex30(r.getRight());
+    }
+
+    public static <T> int ex31(BinNode<T> root, int level){
+        if(root==null) return 0;
+        if(level==0){return 1;}
+        int count = 0;
+        if(root.hasLeft()) {
+            count += ex31(root.getLeft(), level-1);
+        }
+        if(root.hasRight()) {
+            count += ex31(root.getRight(), level-1);
+        }
+        return count;
+    }
+
+    public static boolean ex32(BinNode<Integer> root, int value){
+        if(root==null) return false;
+        if(root.getValue() == value) return true;
+        if(root.getValue() < value) return ex32(root.getRight(), value);
+        return ex32(root.getLeft(), value);
     }
 }
