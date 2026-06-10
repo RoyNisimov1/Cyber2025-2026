@@ -12,7 +12,10 @@ public class Main{
 
         int[] arr4 = {10, 22, 9, 33, 21, 50, 41, 60};
         System.out.println(ex7(arr4));
-        System.out.println(ex7(arr3));
+
+        int[] arr5 = {2, 2, 2, 5, 7, 7, 7, 7, 1};
+        ex5(arr5);
+
 
     }
     public static void ex9(){
@@ -106,6 +109,22 @@ public class Main{
             take = 1 + lcsHelper(arr, index + 1, index);
         }
         return Math.max(take, leave);
+    }
+
+    public static void ex5(int[] arr){
+        int k = 3;
+        int currLen = 1;
+        int currStartIndex = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            if(arr[i] == arr[i+1]){
+                currLen++;
+            }else {
+                if (currLen>= k) System.out.println(arr[currStartIndex] + " appears " + currLen + " times starting from index " + currStartIndex);
+                currLen = 1;
+                currStartIndex = i+1;
+            }
+        }
+        if (currLen>= k) System.out.println(arr[currStartIndex] + " appears " + currLen + " times starting from index " + currStartIndex);
     }
 
 }
