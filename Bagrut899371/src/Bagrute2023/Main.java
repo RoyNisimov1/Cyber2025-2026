@@ -9,6 +9,8 @@ public class Main {
         System.out.println(discounts(71, 3, false));
         int[] arr = {3, 4, 2, 1, 0};
         System.out.println(originalText("dyutS", arr));
+
+
     }
 
     public static boolean success(int num){
